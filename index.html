@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>改善ポイント診断(3分)| Boar Book</title>
+<meta name="description" content="インスタやホームページの「何から改善するとよいか」が、9つの質問で分かります。改善する順番と、おすすめのサポートをお伝えします。">
+<style>
+:root{
+  --bg:#fbf4ef; --card:#ffffff; --ink:#3d2618; --sub:#6d523b; --line:#ead9cd;
+  --accent:#e47f85; --accent-dark:#c9646b; --soft:#f6e6e2; --ok:#06c755;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  line-height:1.8;font-size:16px}
+.wrap{max-width:640px;margin:0 auto;padding:20px 16px 56px}
+.brand{text-align:center;color:var(--sub);font-size:14px;letter-spacing:.08em;margin:8px 0 18px}
+h1{font-size:24px;line-height:1.5;margin:0 0 12px;text-align:center}
+h2{font-size:19px;line-height:1.6;margin:0 0 10px}
+h3{font-size:16px;margin:0 0 6px}
+p{margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:16px}
+.lead{color:var(--sub);text-align:center}
+.btn{display:block;width:100%;border:0;border-radius:999px;padding:15px 18px;font-size:16px;font-weight:700;
+  text-align:center;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn-main{background:var(--accent);color:#fff}
+.btn-main:hover{background:var(--accent-dark)}
+.btn-line{background:var(--ok);color:#fff;margin-bottom:10px}
+.btn-sub{background:#fff;color:var(--sub);border:1px solid var(--line);font-weight:600}
+.btn:focus-visible,.opt:focus-within{outline:3px solid #8a6a4f;outline-offset:2px}
+.progress{height:8px;background:var(--line);border-radius:999px;overflow:hidden;margin-bottom:6px}
+.progress>div{height:100%;background:var(--accent);width:0;transition:width .25s}
+.count{color:var(--sub);font-size:14px;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;
+  padding:13px 14px;margin-bottom:10px;background:#fff;cursor:pointer}
+.opt input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.opt.on{border-color:var(--accent);background:var(--soft)}
+.hint{color:var(--sub);font-size:14px}
+.nav{display:flex;gap:10px;margin-top:14px}
+.nav .btn{width:auto;flex:1}
+.nav .btn-sub{flex:0 0 36%}
+.tag{display:inline-block;background:var(--soft);color:var(--sub);border-radius:999px;padding:2px 12px;font-size:13px;margin-bottom:8px}
+ul.tidy{margin:0 0 12px;padding-left:1.3em}
+ul.tidy li{margin-bottom:4px}
+.support{background:var(--soft);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.memo{background:#fffaf6;border:1px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:15px}
+.memo li{margin-bottom:2px}
+.small{font-size:13px;color:var(--sub)}
+.hidden{display:none}
+.prlist{list-style:none;margin:8px 0 0;padding:0}
+.pr{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fff}
+.pr .rank{flex:none;width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--sub);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.pr .nm{flex:1;font-weight:700}
+.pr .lv{font-size:13px;color:var(--sub)}
+.pr.hi{border-color:var(--accent);background:var(--soft)}
+.pr.hi .rank{background:var(--accent);color:#fff}
+.pr.hi .lv{color:var(--accent-dark);font-weight:700}
+.pr.lo{opacity:.85}
+.cta-box{border:2px solid var(--ok);border-radius:16px;padding:18px;background:#fff}
+.keys{background:var(--bg);border-radius:10px;padding:8px 12px;margin:8px 0 14px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Boar Book</div>
+
+  <!-- トップ -->
+  <section id="top">
+    <h1>改善ポイント診断<br>(3分)</h1>
+    <p class="lead">インスタやホームページの、<br>「何から改善するとよいか」が分かります。<br>9つの質問に答えるだけです。</p>
+    <div class="card">
+      <ul class="tidy">
+        <li>ご登録やお名前は、いりません。</li>
+        <li>正解・不正解はありません。いまの状態を、そのまま選んでください。</li>
+        <li>改善する順番と、最初の3つのことが、この画面でそのまま読めます。</li>
+      </ul>
+      <button class="btn btn-main" id="start">診断をはじめる</button>
+    </div>
+    <p class="small">※ 診断の結果は、状況を整理するための目安です。成果をお約束するものではありません。</p>
+  </section>
+
+  <!-- 質問 -->
+  <section id="quiz" class="hidden" aria-live="polite">
+    <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <div class="card">
+      <h2 id="qtext"></h2>
+      <p class="hint" id="qhint"></p>
+      <div id="opts"></div>
+      <div class="nav">
+        <button class="btn btn-sub" id="back">もどる</button>
+        <button class="btn btn-main" id="next" disabled>つぎへ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 結果 -->
+  <section id="result" class="hidden"></section>
+
+  <p class="small" style="text-align:center;margin-top:24px">© Boar Book</p>
+</div>
+
+<script>
+/* ===== 設定 ===== */
+var LINE_ID = '@kwi2429j';          // LINE公式アカウント
+var GA_ID   = '';                    // GA4の測定ID(例 G-XXXXXXXXXX)を入れると、診断の開始・完了などを記録します
+
+/* ===== GA4(IDを入れた場合のみ読み込み) ===== */
+(function(){
+  if(!GA_ID) return;
+  var s=document.createElement('script'); s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID; document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments)};
+  gtag('js',new Date()); gtag('config',GA_ID);
+})();
+function track(name,params){ try{ if(window.gtag) gtag('event',name,params||{}); }catch(e){} }
+
+/* ===== 質問(points: 選択肢ごとの、タイプA〜Dへの加点) ===== */
+var Q = [
+ {t:'インスタ(SNS)の、いまの状況は?', o:[
+   {l:'まだ始めていない', p:{A:1,D:1}},
+   {l:'始めたが、止まっている', p:{A:2,D:1}},
+   {l:'続けている', p:{C:1}} ]},
+ {t:'インスタに何を投稿するかは、決まっていますか?', o:[
+   {l:'決まっている', p:{}},
+   {l:'ときどき迷う', p:{A:1}},
+   {l:'ほぼ決まっていない', p:{A:2}} ]},
+ {t:'インスタやホームページを担当できる人は?', o:[
+   {l:'担当の人がいる', p:{}},
+   {l:'兼任で、なんとかやっている', p:{D:1}},
+   {l:'いない', p:{D:2}} ]},
+ {t:'ホームページを最後に更新したのは?', o:[
+   {l:'1か月以内', p:{}},
+   {l:'半年以内', p:{B:1}},
+   {l:'1年以上前・覚えていない', p:{B:2}} ]},
+ {t:'お問い合わせは、月にどのくらいありますか?', o:[
+   {l:'十分ある', p:{}},
+   {l:'たまにある', p:{C:1}},
+   {l:'ほとんどない', p:{C:2}} ]},
+ {t:'お問い合わせの入口は、どれがありますか?', hint:'あてはまるものを、すべて選んでください。', multi:true, o:[
+   {l:'電話', k:'tel'},
+   {l:'お問い合わせフォーム', k:'form'},
+   {l:'LINE', k:'line'},
+   {l:'特にない', k:'none'} ]},
+ {t:'毎週、インスタやホームページに使える時間は?', o:[
+   {l:'ほとんどない', p:{D:2}},
+   {l:'1〜2時間', p:{D:1}},
+   {l:'3時間以上', p:{}} ]},
+ {t:'いま、いちばんお困りのことは?', o:[
+   {l:'インスタに、何を投稿していいか分からない', p:{A:3}},
+   {l:'ホームページが、あるだけになっている', p:{B:3}},
+   {l:'お問い合わせが来ない', p:{C:3}},
+   {l:'インスタやホームページを、できる人がいない', p:{D:3}} ]},
+ {t:'これから、どうしていきたいですか?', hint:'結果には影響しません。ご相談のときのメモになります。', o:[
+   {l:'新しいお客様を増やしたい', p:{}},
+   {l:'今のお客様を大切にしたい', p:{}},
+   {l:'人材の採用にも使いたい', p:{}},
+   {l:'まだ決まっていない', p:{}} ]}
+];
+
+/* ===== 結果 ===== */
+var TYPES = {
+ A:{name:'投稿の中身', sup:'SNSサポート・運用代行',
+   read:'投稿の中身を決める「型」と、決める時間を作ると、前に進みやすくなるかもしれません。ネタがないのではなく、決め方がないだけ、ということも多いです。',
+   todo:['投稿のテーマを、3つに絞る(例:お客様の質問、仕事の様子、お知らせ)','1週間分の投稿を、まとめて決めておく','写真の撮り方を、1つだけ決める'],
+   sup_list:[
+    ['SNSサポート','1回60分。企画のたて方、写真・文章・リールの作り方を、一緒に手を動かして進めます。'],
+    ['SNS運用代行','週2〜3回の投稿の企画・作成・投稿を、お任せいただけます。']]},
+ B:{name:'ホームページ', sup:'HPの見直し・コンサル',
+   read:'ホームページは、作ったあとに「何を直すと問い合わせにつながるか」を見直すと、動きやすくなるかもしれません。まずは、いまの状態を知ることからです。',
+   todo:['トップページに、電話やお問い合わせの入口があるか見る','お知らせや実績が、古いまま残っていないか見る','スマホで、見やすいか確認する'],
+   sup_list:[
+    ['HPの見直し','現状を診断したあとに、ご提案とお見積りをお出しします。'],
+    ['SNS・HPコンサル','月1回の面談で、投稿やHPのチェックと改善提案をします。']]},
+ C:{name:'問い合わせの流れ', sup:'コンサル・LINE構築',
+   read:'見てくれた人が「次に何をすればいいか」分かる流れを作ると、進みやすくなるかもしれません。入口を増やすより、まず「迷わない道」を作ることからです。',
+   todo:['インスタやHPに、お問い合わせの方法を1つだけ目立たせる','お問い合わせ後の、返事の流れを決めておく','LINEなど、気軽に話せる入口を検討する'],
+   sup_list:[
+    ['SNS・HPコンサル','HP・SNSの改善提案と、お問い合わせにつながる導線づくりを、月1回の面談で進めます。'],
+    ['LINE公式アカウント構築','登録から相談までの流れを設計します(あいさつ・自動応答・リッチメニューなど)。']]},
+ D:{name:'担当する人・時間', sup:'SNS運用代行',
+   read:'社内だけで続けるのは、難しい状態かもしれません。無理に抱えず、外のスタッフに任せる方法も合いそうです。',
+   todo:['週にかけられる時間を、正直に決める','任せたいこと(投稿・撮影・返信など)を、書き出す','「やらないこと」も、先に決める'],
+   sup_list:[
+    ['SNS運用代行','週2〜3回の企画・作成・投稿を、代わりに行います。必要に応じて、ストーリーズやコメント・DMの一次対応、月次レポートも。'],
+    ['SNSサポート','まず一緒にやってみたい方には、1回60分から、手を動かしながらお手伝いします。']]}
+};
+var ORDER=['A','B','C','D'];
+
+/* ===== 状態 ===== */
+var idx=0, ans=[]; // ans[i] = 選択肢の配列(index)
+var $=function(id){return document.getElementById(id)};
+
+function show(id){ ['top','quiz','result'].forEach(function(s){ $(s).classList.toggle('hidden',s!==id) }); window.scrollTo(0,0); }
+
+$('start').onclick=function(){ idx=0; ans=[]; track('check_start'); show('quiz'); render(); };
+$('back').onclick=function(){ if(idx>0){ idx--; render(); } else { show('top'); } };
+$('next').onclick=function(){
+  if(idx<Q.length-1){ idx++; render(); } else { finish(); }
+};
+
+function render(){
+  var q=Q[idx], sel=ans[idx]||[];
+  $('bar').style.width=((idx)/Q.length*100)+'%';
+  $('count').textContent='質問 '+(idx+1)+' / '+Q.length;
+  $('qtext').textContent=q.t;
+  $('qhint').textContent=q.hint||'';
+  $('qhint').style.display=q.hint?'block':'none';
+  var box=$('opts'); box.innerHTML='';
+  q.o.forEach(function(op,i){
+    var lab=document.createElement('label'); lab.className='opt'+(sel.indexOf(i)>-1?' on':'');
+    var inp=document.createElement('input'); inp.type=q.multi?'checkbox':'radio'; inp.name='q'; inp.value=i;
+    inp.checked=sel.indexOf(i)>-1;
+    inp.onchange=function(){
+      var cur=ans[idx]||[];
+      if(q.multi){
+        var k=q.o[i].k;
+        if(inp.checked){
+          if(k==='none'){ cur=[i]; }
+          else { cur=cur.filter(function(x){return q.o[x].k!=='none'}); cur.push(i); }
+        } else { cur=cur.filter(function(x){return x!==i}); }
+      } else { cur=[i]; }
+      ans[idx]=cur; render();
+    };
+    var sp=document.createElement('span'); sp.textContent=op.l;
+    lab.appendChild(inp); lab.appendChild(sp); box.appendChild(lab);
+  });
+  $('next').disabled=!(ans[idx]&&ans[idx].length);
+  $('next').textContent=(idx===Q.length-1)?'結果を見る':'つぎへ';
+}
+
+/* ===== 採点 ===== */
+function score(){
+  var s={A:0,B:0,C:0,D:0};
+  Q.forEach(function(q,qi){
+    var sel=ans[qi]||[];
+    if(q.multi){
+      var ks=sel.map(function(i){return q.o[i].k});
+      if(ks.indexOf('none')>-1) s.C+=2;
+      else if(ks.indexOf('line')<0) s.C+=1;
+    } else {
+      sel.forEach(function(i){ var p=q.o[i].p||{}; for(var k in p) s[k]+=p[k]; });
+    }
+  });
+  return s;
+}
+function pick(s){
+  // 最高点。同点のときは「いちばんお困りのこと」(質問8)で選んだタイプを優先
+  var main=null; var q8=ans[7]&&ans[7][0];
+  var map=['A','B','C','D']; if(q8!=null) main=map[q8];
+  var top=ORDER.slice().sort(function(a,b){ return s[b]-s[a] || (b===main)-(a===main) || ORDER.indexOf(a)-ORDER.indexOf(b); });
+  var first=top[0], second=null;
+  if(s[top[1]]>=3) second=top[1];
+  return {first:first, second:second};
+}
+
+function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]}) }
+function lineLink(text){ return 'https://line.me/R/oaMessage/'+LINE_ID+'/?'+encodeURIComponent(text); }
+function addLink(){ return 'https://line.me/R/ti/p/'+LINE_ID; }
+
+function memoHtml(){
+  var rows=[
+   ['インスタ', Q[0].o[ans[0][0]].l],
+   ['投稿の中身', Q[1].o[ans[1][0]].l],
+   ['担当者', Q[2].o[ans[2][0]].l],
+   ['HPの更新', Q[3].o[ans[3][0]].l],
+   ['お問い合わせ', Q[4].o[ans[4][0]].l],
+   ['問い合わせの入口', ans[5].map(function(i){return Q[5].o[i].l}).join('・')],
+   ['週に使える時間', Q[6].o[ans[6][0]].l],
+   ['いちばんの困りごと', Q[7].o[ans[7][0]].l],
+   ['これから', Q[8].o[ans[8][0]].l]
+  ];
+  return '<ul class="tidy">'+rows.map(function(r){return '<li>'+esc(r[0])+':'+esc(r[1])+'</li>'}).join('')+'</ul>';
+}
+
+function levelOf(v){ return v>=4?['先に改善したい','hi']:(v>=2?['次に改善したい','mid']:['いまは大丈夫そう','lo']); }
+function priorityHtml(s,first){
+  var list=ORDER.slice().sort(function(a,b){ return s[b]-s[a] || (b===first)-(a===first) || ORDER.indexOf(a)-ORDER.indexOf(b); });
+  var rows=list.map(function(k,i){
+    var lv=levelOf(s[k]); if(k===first) lv=['先に改善したい','hi'];
+    return '<li class="pr '+lv[1]+'"><span class="rank">'+(i+1)+'</span><span class="nm">'+esc(TYPES[k].name)+'</span><span class="lv">'+lv[0]+'</span></li>';
+  }).join('');
+  return '<div class="card"><h3>改善する順番</h3><ol class="prlist">'+rows+'</ol><p class="small" style="margin:8px 0 0">お答えをもとにした目安です。まずは、1位から進めるのがおすすめです。</p></div>';
+}
+function typeCard(k,isMain){
+  var T=TYPES[k];
+  var sup=T.sup_list.map(function(s){return '<div class="support"><h3>'+esc(s[0])+'</h3><p style="margin:0">'+esc(s[1])+'</p></div>'}).join('');
+  var todo='<ul class="tidy">'+T.todo.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>';
+  return '<div class="card">'+
+    '<span class="tag">'+(isMain?'いちばん先に改善したいこと':'次に改善したいこと')+'</span>'+
+    '<h2>'+esc(T.name)+'</h2>'+
+    '<p>'+esc(T.read)+'</p>'+
+    '<h3>改善の進め方(最初の3つ)</h3>'+todo+
+    '<h3>当社のおすすめのサポート</h3>'+sup+
+  '</div>';
+}
+
+function finish(){
+  var s=score(), r=pick(s), k=r.first;
+  track('check_complete',{result_type:k});
+  $('bar').style.width='100%';
+  var html='';
+  html+='<h1>診断の結果</h1>';
+  html+='<p class="lead">おつかれさまでした。<br>改善する順番は、こちらです。</p>';
+  html+=priorityHtml(s,k);
+  html+=typeCard(k,true);
+  if(r.second) html+=typeCard(r.second,false);
+  html+='<div class="card"><h3>ご相談のときのメモ</h3><p class="small">お答えいただいた内容です。ご相談のときに、このまま使えます。</p><div class="memo">'+memoHtml()+'</div></div>';
+  html+='<div class="cta-box">'+
+    '<h2>サポートの内容を、詳しく知りたい方へ</h2>'+
+    '<p>詳しく知りたい方・まずは相談したい方は、LINEの友だち追加のあと、下のどちらかを送ってください。内容を確認して、1〜2営業日以内にご連絡します。</p>'+
+    '<div class="keys">「サポート'+k+'」…サポートの内容を詳しく知りたい<br>「相談'+k+'」…まず相談したい</div>'+
+    '<a class="btn btn-line" id="l1" href="'+lineLink('サポート'+k)+'" target="_blank" rel="noopener">LINEで「サポート'+k+'」を送る</a>'+
+    '<a class="btn btn-line" id="l2" href="'+lineLink('相談'+k)+'" target="_blank" rel="noopener">LINEで「相談'+k+'」を送る</a>'+
+    '<p class="small" style="margin:6px 0 0">ボタンで文字が入らないときは、<a href="'+addLink()+'" target="_blank" rel="noopener">友だち追加</a>のあと、上の言葉を入力して送ってください。<br>※ 無理な営業はいたしません。</p>'+
+  '</div>';
+  html+='<div style="margin-top:16px"><button class="btn btn-sub" id="again">もう一度、診断する</button></div>';
+  html+='<p class="small" style="margin-top:14px">※ この結果は、状況を整理するための目安です。成果をお約束するものではありません。お答えの内容は、この画面の中だけで使い、送信・保存はしません。</p>';
+  $('result').innerHTML=html;
+  show('result');
+  $('l1').onclick=function(){ track('line_click',{kind:'support',result_type:k}); };
+  $('l2').onclick=function(){ track('line_click',{kind:'consult',result_type:k}); };
+  $('again').onclick=function(){ show('top'); };
+}
+</script>
+</body>
+</html>
